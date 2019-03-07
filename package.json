@@ -86,7 +86,12 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-ionic-webview": {}
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic": {
+        "APP_ID": "a350e94e",
+        "CHANNEL_NAME": "Master",
+        "UPDATE_METHOD": "auto"
+      }
     }
   }
 }
