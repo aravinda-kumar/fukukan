@@ -32,9 +32,11 @@ export class CounterInputComponent implements ControlValueAccessor, OnChanges {
   @Input('max') counterRangeMax;
   // tslint:disable-next-line:no-input-rename
   @Input('min') counterRangeMin;
+  // tslint:disable-next-line:no-input-rename
+  @Input('increment') _increment = 1;
 
-  propagateChange: any = () => {}; // Noop function
-  validateFn: any = () => {}; // Noop function
+  propagateChange: any = () => { }; // Noop function
+  validateFn: any = () => { }; // Noop function
 
   get counterValue() {
     return this._counterValue;
@@ -61,14 +63,14 @@ export class CounterInputComponent implements ControlValueAccessor, OnChanges {
     this.propagateChange = fn;
   }
 
-  registerOnTouched() {}
+  registerOnTouched() { }
 
   increase() {
-    this.counterValue++;
+    this.counterValue += (this._increment + 0);
   }
 
   decrease() {
-    this.counterValue--;
+    this.counterValue -= (this._increment + 0);
   }
 
   validate(c: FormControl) {

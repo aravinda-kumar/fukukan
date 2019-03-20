@@ -3,6 +3,12 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
@@ -10,93 +16,128 @@
   <ion-row class="user-details-section">
     <ion-col class="user-image-wrapper">
       <app-aspect-ratio [ratio]="{w: 1, h: 1}">
-        <app-image-shell class="user-image add-spinner" [src]="profile.userImage"></app-image-shell>
+        <app-image-shell class="user-image" animation="spinner" [src]="profile.userImage"></app-image-shell>
       </app-aspect-ratio>
     </ion-col>
     <ion-col class="user-info-wrapper">
       <ion-row class="user-data-row">
         <ion-col size="9">
           <h3 class="user-name">
-            <app-text-shell class="no-animation" [data]="profile.name"></app-text-shell>
+            <app-text-shell [data]="profile.name"></app-text-shell>
           </h3>
-          <h5 class="user-title">
-            <app-text-shell class="no-animation" [data]="profile.job"></app-text-shell>
+          <h5 class="user-motto;">
+            <app-text-shell [data]="profile.motto"></app-text-shell>
           </h5>
         </ion-col>
-        <ion-col class="membership-col">
+        <ion-col *ngIf="profile.proMember === ''" class="membership-col">
+          <span class="user-freemembership">
+            <app-text-shell [data]="'FREE'"></app-text-shell>
+          </span>
+        </ion-col>
+        <ion-col *ngIf="profile.proMember !== ''" class="membership-col">
           <span class="user-membership">
-            <app-text-shell [data]="profile.membership" class="no-animation"></app-text-shell>
+            <app-text-shell [data]="profile.proMember"></app-text-shell>
           </span>
         </ion-col>
       </ion-row>
+
       <ion-row class="actions-row">
-        <ion-col class="main-actions">
-          <ion-button class="call-to-action-btn" size="small" color="primary">Follow</ion-button>
-          <ion-button class="call-to-action-btn" size="small" color="medium">Message</ion-button>
-        </ion-col>
-        <ion-col class="secondary-actions">
-          <ion-button class="more-btn" size="small" fill="clear" color="medium">
-            <ion-icon slot="icon-only" name="more"></ion-icon>
-          </ion-button>
+        <ion-col class="game-actions">
+          <ion-button class="call-to-action-btn" *ngFor="let game of profile.games" size="small" color="primary">{{game
+            | uppercase}}</ion-button>
         </ion-col>
       </ion-row>
     </ion-col>
   </ion-row>
+  <!--
   <ion-row class="user-stats-section">
-    <ion-col class="user-stats-wrapper" size="4">
+    <ion-col class="user-stats-wrapper" size="3">
       <span class="stat-value">
-        <app-text-shell [data]="profile.likes" class="no-animation"></app-text-shell>
+        <app-text-shell [data]="profile.statistics.global.match" class="no-animation"></app-text-shell>
       </span>
-      <span class="stat-name">Likes</span>
+      <span class="stat-name">Matches</span>
     </ion-col>
-    <ion-col class="user-stats-wrapper" size="4">
+   <ion-col class="user-stats-wrapper" size="3">
       <span class="stat-value">
-        <app-text-shell [data]="profile.followers" class="no-animation"></app-text-shell>
+        <app-text-shell [data]="profile.statistics.global.win" class="no-animation"></app-text-shell>
       </span>
-      <span class="stat-name">Followers</span>
+      <span class="stat-name">Wins</span>
     </ion-col>
-    <ion-col class="user-stats-wrapper" size="4">
+    <ion-col class="user-stats-wrapper" size="3">
       <span class="stat-value">
-        <app-text-shell [data]="profile.following" class="no-animation"></app-text-shell>
+        <app-text-shell [data]="profile.statistics.global.draw" class="no-animation"></app-text-shell>
       </span>
-      <span class="stat-name">Following</span>
+      <span class="stat-name">Draws</span>
+    </ion-col>
+    <ion-col class="user-stats-wrapper" size="3">
+      <span class="stat-value">
+        <app-text-shell [data]="profile.statistics.global.loss" class="no-animation"></app-text-shell>
+      </span>
+      <span class="stat-name">Losses</span>
     </ion-col>
   </ion-row>
+-->
   <div class="user-about-section">
     <h3 class="details-section-title">About</h3>
     <p class="user-description">
       <app-text-shell [data]="profile.about" [attr.lines]="4"></app-text-shell>
     </p>
   </div>
-  <div class="user-friends-section">
+
+  <!-- Achievments
+  <div class="user-badges-section">
     <ion-row class="heading-row">
-      <h3 class="details-section-title">Friends</h3>
+      <h3 class="details-section-title">Achievements</h3>
       <a class="heading-call-to-action" [routerLink]="['/app/user/friends']">See all</a>
     </ion-row>
-    <ion-row class="friends-row">
-      <ion-col class="friend-item" size="2" *ngFor="let friend of profile.friends">
+    <ion-row class="badges-row">
+      <ion-col class="badge-item" size="2" *ngFor="let badges of profile.badges.list">
         <app-aspect-ratio [ratio]="{w: 1, h: 1}">
-          <app-image-shell class="friend-picture" [src]="friend.image"></app-image-shell>
+          <app-image-shell class="badge-picture" [src]="badges.image"></app-image-shell>
         </app-aspect-ratio>
-        <span class="friend-name">
-          <app-text-shell [data]="friend.name" class="no-animation"></app-text-shell>
+        <span class="badge-name">
+          <app-text-shell [data]="badges.name" class="no-animation"></app-text-shell>
         </span>
       </ion-col>
     </ion-row>
   </div>
-
-  <div class="user-photos-section">
+-->
+  <!-- Badges 
+  <div class="user-friends-section">
     <ion-row class="heading-row">
-      <h3 class="details-section-title">Photos</h3>
+      <h3 class="details-section-title">Event Badges</h3>
+      <a class="heading-call-to-action" [routerLink]="['/app/user/friends']">See all</a>
+    </ion-row>
+    <ion-row class="friends-row">
+      <ion-col class="friend-item" size="2" *ngFor="let badge of profile.eventbadges">
+        <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+          <app-image-shell class="friend-picture" [src]="badge.image"></app-image-shell>
+        </app-aspect-ratio>
+        <span class="friend-name">
+          <app-text-shell [data]="badge.event" class="no-animation"></app-text-shell>
+        </span>
+      </ion-col>
+    </ion-row>
+  </div>
+-->
+  <!-- Army list
+ <div class="user-army-section">
+    <ion-row class="heading-row">
+      <h3 class="details-section-title">Armies</h3>
       <a class="heading-call-to-action">See all</a>
     </ion-row>
-    <ion-row class="pictures-row">
-      <ion-col class="picture-item" size="2" *ngFor="let photo of profile.photos">
-        <app-image-shell [mode]="'cover'" [src]="photo.image" class="user-photo-image">
+    <ion-row class="army-row">
+      <ion-col class="army-item army-category" size="6" *ngFor="let army of profile.armies">
+        <app-image-shell [mode]="'cover'" [src]="army.image" class="army-picture">
           <app-aspect-ratio [ratio]="{w:1, h:1}">
-          </app-aspect-ratio>
+         
+          <a class="army-anchor" [routerLink]="['/app/categories/travel']">
+            <h2 class="army-title">{{army.faction}}</h2>
+          </a>
+        </app-aspect-ratio>
         </app-image-shell>
       </ion-col>
     </ion-row>
   </div>
+   -->
 </ion-content>

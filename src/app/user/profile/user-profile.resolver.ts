@@ -9,12 +9,13 @@ export class UserProfileResolver implements Resolve<any> {
 
   resolve() {
     // Get the Shell Provider from the service
-    const shellProviderObservable = this.userService.getProfileDataWithShell();
-
-    // Resolve with Shell Provider
-    const observablePromise = new Promise((resolve, reject) => {
-      resolve(shellProviderObservable);
+    return new Promise((resolve, reject) => {
+      this.userService.getUserProfileData()
+      .then(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      });
     });
-    return observablePromise;
   }
 }

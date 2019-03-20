@@ -1,0 +1,244 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="app/army"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add a new army</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="forms-armylist-content">
+  <form class="armylist-form" [formGroup]="armylistForm" (ngSubmit)="onSubmit(armylistForm.value)">
+    <ion-list class="inputs-list" lines="full">
+      <ion-list-header>
+        <ion-label class="header-title">General information</ion-label>
+      </ion-list-header>
+
+      <ion-item class="input-item">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input type="text" formControlName="name" clearInput required></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.name">
+          <div class="error-message" *ngIf="armylistForm.get('name').hasError(validation.type) && (armylistForm.get('name').dirty || armylistForm.get('name').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="input-item">
+        <ion-label position="floating">Game</ion-label>
+        <ion-select formControlName="game" cancelText="Cancel" okText="OK">
+          <ion-select-option *ngFor="let game of appSettings.games" [value]="game">{{ game }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-label position="floating">Faction</ion-label>
+        <ion-input type="text" formControlName="faction" clearInput required></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.faction">
+          <div class="error-message" *ngIf="armylistForm.get('faction').hasError(validation.type) && (armylistForm.get('faction').dirty || armylistForm.get('faction').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="counter-item input-item">
+        <ion-label>Power Level</ion-label>
+        <app-counter-input formControlName="level"></app-counter-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.level">
+          <div class="error-message" *ngIf="armylistForm.get('level').hasError(validation.type) && (armylistForm.get('level').dirty || armylistForm.get('level').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }} {{ armylistForm.get('level').getError(validation.type).min }} and {{
+              armylistForm.get('level').getError(validation.type).max }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="counter-item input-item">
+        <ion-label>Points</ion-label>
+        <app-counter-input formControlName="point" increment="250"></app-counter-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.point">
+          <div class="error-message" *ngIf="armylistForm.get('point').hasError(validation.type) && (armylistForm.get('point').dirty || armylistForm.get('point').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }} {{ armylistForm.get('point').getError(validation.type).min }} and {{
+              armylistForm.get('point').getError(validation.type).max }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="area-item input-item">
+        <ion-label position="floating">List</ion-label>
+        <ion-textarea type="text" formControlName="list" spellcheck="false" clearInput rows="15" wrap="none"></ion-textarea>
+      </ion-item>
+
+      <!--
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.name">
+          <div class="error-message" *ngIf="armylistForm.get('name').hasError(validation.type) && (armylistForm.get('name').dirty || armylistForm.get('name').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="input-item">
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input type="text" formControlName="lastname" clearInput></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.lastname">
+          <div class="error-message" *ngIf="armylistForm.get('lastname').hasError(validation.type) && (armylistForm.get('lastname').dirty || armylistForm.get('lastname').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="input-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" formControlName="email" clearInput inputmode="email"></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.email">
+          <div class="error-message" *ngIf="armylistForm.get('email').hasError(validation.type) && (armylistForm.get('email').dirty || armylistForm.get('email').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+    </ion-list>
+
+    <ion-list class="inputs-list" lines="full">
+      <ion-list-header>
+        <ion-label class="header-title">Phone armylist</ion-label>
+      </ion-list-header>
+
+      <div formGroupName="country_phone">
+        <ion-item class="input-item">
+          <ion-label position="floating">Country</ion-label>
+          <ion-select formControlName="country" cancelText="Cancel" okText="OK">
+            <ion-select-option *ngFor="let item of countries" [value]="item" >{{item.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-label position="floating">Phone</ion-label>
+          <ion-input clearInput placeholder="{{ armylistForm.value.country_phone.country.sample_phone }}" type="text" formControlName="phone"></ion-input>
+        </ion-item>
+        <div class="error-container">
+          <ng-container *ngFor="let validation of validator.phone">
+            <div class="error-message" *ngIf="armylistForm.get('country_phone').get('phone').hasError(validation.type) && (armylistForm.get('country_phone').get('phone').dirty || armylistForm.get('country_phone').get('phone').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>{{ validation.message }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ion-list>
+
+    <ion-list class="inputs-list" lines="full">
+      <ion-list-header>
+        <ion-label class="header-title">Password armylist</ion-label>
+      </ion-list-header>
+
+      <div formGroupName="matching_passwords">
+        <ion-item class="input-item">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <div class="error-container">
+          <ng-container *ngFor="let validation of validator.password">
+            <div class="error-message" *ngIf="armylistForm.get('matching_passwords').get('password').hasError(validation.type) && (armylistForm.get('matching_passwords').get('password').dirty || armylistForm.get('matching_passwords').get('password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>{{ validation.message }}</span>
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="input-item">
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input type="password" formControlName="confirm_password"></ion-input>
+        </ion-item>
+        <div class="error-container">
+          <ng-container *ngFor="let validation of validator.confirm_password">
+            <div class="error-message" *ngIf="armylistForm.get('matching_passwords').get('confirm_password').hasError(validation.type) && (armylistForm.get('matching_passwords').get('confirm_password').dirty || armylistForm.get('matching_passwords').get('confirm_password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span>{{ validation.message }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.matching_passwords">
+          <div class="error-message" *ngIf="armylistForm.get('matching_passwords').hasError(validation.type) && (armylistForm.get('matching_passwords').get('confirm_password').dirty || armylistForm.get('matching_passwords').get('confirm_password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </ion-list>
+
+    <ion-list class="inputs-list" lines="full">
+      <ion-list-header>
+        <ion-label class="header-title">Counter armylist</ion-label>
+      </ion-list-header>
+      <ion-item class="counter-item input-item">
+        <ion-label>Guests</ion-label>
+        <app-counter-input formControlName="guests"></app-counter-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.guests">
+          <div class="error-message" *ngIf="armylistForm.get('guests').hasError(validation.type) && (armylistForm.get('guests').dirty || armylistForm.get('guests').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }} {{ armylistForm.get('guests').getError(validation.type).min }} and {{ armylistForm.get('guests').getError(validation.type).max }}</span>
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="counter-item input-item">
+        <ion-label class="counter-label">Bedrooms</ion-label>
+        <ion-label class="counter-value">{{armylistForm.controls.bedrooms.value}}</ion-label>
+        <app-counter-input formControlName="bedrooms" basic></app-counter-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.bedrooms">
+          <div class="error-message" *ngIf="armylistForm.get('bedrooms').hasError(validation.type) && (armylistForm.get('bedrooms').dirty || armylistForm.get('bedrooms').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }} {{ armylistForm.get('bedrooms').getError(validation.type).min }} and {{ armylistForm.get('bedrooms').getError(validation.type).max }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </ion-list>
+
+    <ion-list class="inputs-list" lines="full">
+      <ion-list-header>
+        <ion-label class="header-title">Terms and Conditions</ion-label>
+      </ion-list-header>
+
+      <ion-item class="input-item terms-item">
+        <ion-label>I accept terms and conditions</ion-label>
+        <ion-checkbox formControlName="terms"></ion-checkbox>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validator.terms">
+          <div class="error-message" *ngIf="armylistForm.get('terms').hasError(validation.type) && (armylistForm.get('terms').dirty || armylistForm.get('terms').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      -->
+    </ion-list>
+
+    <ion-button class="submit-btn" type="submit" expand="block" fill="outline" [disabled]="!armylistForm.valid">Submit</ion-button>
+  </form>
+</ion-content>

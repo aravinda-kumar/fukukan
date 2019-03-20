@@ -1,7 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
-import { UserProfileModel } from './user-profile.model';
+import { UserProfileModel, UserProfileInterface } from '../../datamodel/user-profile.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,15 +15,24 @@ import { UserProfileModel } from './user-profile.model';
   ],
 })
 export class UserProfilePage implements OnInit {
-  profile: UserProfileModel;
+  profile: UserProfileModel = new UserProfileModel(true);
 
   @HostBinding('class.is-shell') get isShell() {
     return (this.profile && this.profile.isShell) ? true : false;
   }
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    if (this.route && this.route.data) {
+      this.getData();
+    }
+  }
+
+  private getData(): void {
+    // Shell data loading
     if (this.route && this.route.data) {
       // We resolved a promise for the data Observable
       const promiseObservable = this.route.data;
@@ -30,20 +40,10 @@ export class UserProfilePage implements OnInit {
 
       if (promiseObservable) {
         promiseObservable.subscribe(promiseValue => {
-          const dataObservable = promiseValue['data'];
-          console.log('Subscribe to promiseObservable => dataObservable: ', dataObservable);
-
-          if (dataObservable) {
-            dataObservable.subscribe(observableValue => {
-              const pageData: UserProfileModel = observableValue;
-              // tslint:disable-next-line:max-line-length
-              console.log('Subscribe to dataObservable (can emmit multiple values) => PageData (' + ((pageData && pageData.isShell) ? 'SHELL' : 'REAL') + '): ', pageData);
-              // As we are implementing an App Shell architecture, pageData will be firstly an empty shell model,
-              // and the real remote data once it gets fetched
-              if (pageData) {
-                this.profile = pageData;
-              }
-            });
+          if (promiseValue) {
+            const dataObservable = promiseValue['data'];
+            console.log('Subscribe to promiseObservable => dataObservable: ', dataObservable);
+            this.profile.mapFromInterface(dataObservable);
           } else {
             console.warn('No dataObservable coming from Route Resolver promiseObservable');
           }

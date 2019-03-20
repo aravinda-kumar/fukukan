@@ -10,6 +10,19 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'army',
+        children: [
+          {
+            path: '',
+            loadChildren: '../army/browse/armylist.module#ArmyListPageModule'
+          },
+          {
+            path: 'add',
+            loadChildren: '../army/add-list/army-add-list.module#ArmyAddListPageModule'
+          }
+        ]
+      },
+      {
         path: 'categories',
         children: [
           {
@@ -93,6 +106,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes), HttpClientModule],
   exports: [RouterModule],
-  providers: [ ]
+  providers: []
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

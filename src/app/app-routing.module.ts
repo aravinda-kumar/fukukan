@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: '/walkthrough', pathMatch: 'full' },
+  { path: 'quote', loadChildren: './quote/quote.module#QuotePageModule' },
   { path: 'walkthrough', loadChildren: './walkthrough/walkthrough.module#WalkthroughPageModule' },
   { path: 'getting-started', loadChildren: './getting-started/getting-started.module#GettingStartedPageModule' },
   { path: 'auth/login', loadChildren: './login/login.module#LoginPageModule' },

@@ -1,14 +1,39 @@
 {
-  "userImage": "./assets/sample-images/notifications/100x100Notification4.jpg",
-  "name": "Stefano Rey",
-  "membership": "PRO",
-  "job": "Product Manager",
+  "userImage": "./assets/sample-data/user/SOLDIER-01.png",
+  "name": "Geek The Player",
+  "membership": "FREE",
+  "subtitle": "Geek & Developer",
+  "games": ["40K", "AoS"],
+  "ranking": [{
+      "game": "40K",
+      "rank": {
+        "global": "1232",
+        "country": "223",
+        "continent": "212"
+      }
+    },
+    {
+      "game": "AoS",
+      "rank": {
+        "global": "122",
+        "country": "22",
+        "continent": "24"
+      }
+    }
+  ],
+  "statistics": {
+    "global": {
+      "match": "34",
+      "win": "10",
+      "loss": "20",
+      "draw": "4"
+    }
+  },
   "likes": "1553",
   "followers": "537K",
   "following": "636",
-  "about": "I am a product manager based in Brazil. I guide new product strategy and launch initial prototype build-outs. I also work with strategic partners to establish and develop new market opportunities.",
-  "friends": [
-    {
+  "about": "This is a test for a player profile showing its general information, along with its global Fukukan achievments and the list of events for which he / she got badges; along with its different armies.",
+  "friends": [{
       "image": "./assets/sample-images/notifications/100x100Notification1.jpg",
       "name": "Martin"
     },
@@ -33,18 +58,53 @@
       "name": "Diane"
     }
   ],
-  "photos": [
-    {
-      "image": "./assets/sample-images/travel/Travel2-64.47.png"
+  "badges": {
+    "unlocked": "1",
+    "total": "43",
+    "list": [{
+      "image": "./assets/sample-data/badges/Book of Knowledge.svg",
+      "name": "Master of Spells"
+    }, {
+      "image": "./assets/sample-data/badges/Medallion Achievement.svg",
+      "name": "Event Winner"
+    }, {
+      "image": "./assets/sample-data/badges/Sky Travelling.svg",
+      "name": "Master of Skies"
+    }, {
+      "image": "./assets/sample-data/badges/Success Trophy.svg",
+      "name": "GT Winner"
+    }, {
+      "image": "./assets/sample-data/badges/Thumbs Up.svg",
+      "name": "Sportsmanship"
+    }, {
+      "image": "./assets/sample-data/badges/Target Market.svg",
+      "name": "Bulleye"
+    }]
+  },
+  "eventbadges": [{
+    "image": "./assets/sample-data/events/bcp_dot_icon.png",
+    "event": "Best Coast Pairings",
+    "unlocked": "5"
+  }, {
+    "image": "./assets/sample-data/events/lvo.2019.jpg",
+    "event": "LVO 2019",
+    "unlocked": "5"
+  }],
+  "armies": [{
+      "image": "./assets/sample-data/army/IMG_0281.JPG",
+      "faction": "Imperial Knight"
     },
     {
-      "image": "./assets/sample-images/travel/Travel3-64.47.png"
+      "image": "./assets/sample-data/army/IMG_0177.JPG",
+      "faction": "Mechanicus"
     },
     {
-      "image": "./assets/sample-images/travel/Travel4-64.47.png"
+      "image": "./assets/sample-data/army/IMG_0179.JPG",
+      "faction": "Eldar"
     },
     {
-      "image": "./assets/sample-images/travel/Travel5-64.47.png"
+      "image": "./assets/sample-data/army/IMG_0180.JPG",
+      "faction": "Imperial Knight"
     }
   ]
 }

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/app/army/add']">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Army List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="armylist-list" *ngFor="let army of (armyLst | async)">
+    <ion-col class="armylist-item travel-armylist" size="12">
+      <app-image-shell [mode]="'cover'" class="armylist-cover" animation="spinner" [src]="'./assets/sample-images/armylist/travel.png'">
+        <app-aspect-ratio [ratio]="{w:75, h:49}">
+          <a class="armylist-anchor" [routerLink]="['/app/armylist/travel']">
+            <h2 class="armylist-title">Travel</h2>
+          </a>
+        </app-aspect-ratio>
+      </app-image-shell>
+    </ion-col>
+  </ion-row>
+</ion-content>

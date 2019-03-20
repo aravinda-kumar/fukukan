@@ -1,6 +1,6 @@
 @import "./utils";
 
-@mixin bouncing-lines-background($lines: 1){
+@mixin bouncing-lines-background($lines: 1) {
   $line-height: var(--text-shell-line-height, 16px);
   $line-spacing: var(--text-shell-line-gutter, 3px);
   $bg-color: var(--text-shell-line-color, #CCC);
@@ -83,7 +83,7 @@
     }
   }
 
-  min-height: calc((#{$line-height} * #{$lines}) + (#{$line-spacing} * (#{$lines} - 1)));
+  @include background-height(min-height, $lines);
 
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;

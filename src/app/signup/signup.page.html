@@ -9,9 +9,9 @@
 
 <ion-content class="signup-content">
   <h2 class="auth-title">
-    Hello World!
+    Register a new account
   </h2>
-  <form [formGroup]="signupForm" (ngSubmit)="doSignup()">
+  <form [formGroup]="signupForm" (ngSubmit)="doSignup(signupForm.value)">
     <ion-list class="inputs-list" lines="full">
       <ion-item class="input-item">
         <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off" inputmode="email"></ion-input>
@@ -65,7 +65,9 @@
     </ion-list>
 
     <ion-button class="signup-btn" type="submit" expand="block" [disabled]="!signupForm.valid">Sign Up</ion-button>
-    <ion-row class="other-auth-options-row">
+    <label class="error-message">{{errorMessage}}</label>
+    <label class="success-message">{{successMessage}}</label>
+       <ion-row class="other-auth-options-row">
       <ion-button class="login-btn" fill="clear" [routerLink]="['/auth/login']">
         Already have an account?
       </ion-button>

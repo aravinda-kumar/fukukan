@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
+  errorMessage = '';
 
   validation_messages = {
     'email': [
@@ -25,6 +27,7 @@ export class LoginPage implements OnInit {
   };
 
   constructor(
+    private authService: AuthService,
     public router: Router,
     public menu: MenuController
   ) {
@@ -34,7 +37,7 @@ export class LoginPage implements OnInit {
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
       'password': new FormControl('', Validators.compose([
-        Validators.minLength(5),
+        Validators.minLength(6),
         Validators.required
       ]))
     });
@@ -44,9 +47,14 @@ export class LoginPage implements OnInit {
     this.menu.enable(false);
   }
 
-  doLogin(): void {
-    console.log('do Log In');
-    this.router.navigate(['app/categories']);
+  doLogin(value): void {
+    this.authService.doEmailLogin(value)
+      .then(res => {
+        this.router.navigate(['/app/user']);
+      }, err => {
+        this.errorMessage = err.message;
+        console.log(err);
+      });
   }
 
   goToForgotPassword(): void {

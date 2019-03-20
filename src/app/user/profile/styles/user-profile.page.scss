@@ -8,6 +8,7 @@
 
   --page-actions-padding: 5px;
   --page-friends-gutter: calc(var(--page-margin) / 2);
+  --page-badges-gutter: calc(var(--page-margin) / 2);
   --page-pictures-gutter: calc(var(--page-margin) / 2);
 }
 
@@ -53,6 +54,17 @@
       .user-membership {
         display: block;
         background-color: var(--ion-color-secondary);
+        color: var(--ion-color-lightest);
+        border-radius: var(--app-narrow-radius);
+        padding: 4px 8px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 14px;
+      }
+ 
+      .user-freemembership {
+        display: block;
+        background-color: var(--ion-color-success);
         color: var(--ion-color-lightest);
         border-radius: var(--app-narrow-radius);
         padding: 4px 8px;
@@ -199,6 +211,121 @@
     }
   }
 }
+
+// User badges & achievments
+.user-badges-section {
+  margin: calc(var(--page-margin) * 2) var(--page-margin) var(--page-margin);
+  padding-bottom: var(--page-margin);
+  border-bottom: 1px solid var(--ion-color-light-shade);
+
+  .heading-row {
+    margin-bottom: var(--page-margin);
+    justify-content: space-between;
+    align-items: center;
+
+    .details-section-title {
+      margin: 0px;
+    }
+
+    .heading-call-to-action {
+      padding: calc(var(--page-margin) / 2) calc(var(--page-margin) / 4);
+      text-decoration: none;
+      color: var(--ion-color-secondary);
+    }
+  }
+
+  .badges-row {
+    --ion-grid-columns: 7; // We want to show three friends and a half. Each friend fills 2 cols => (3.5 * 2 = 7 cols)
+    --ion-grid-column-padding: 0px;
+
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    will-change: scroll-position;
+    margin-left: calc(var(--page-margin) * -1);
+    margin-right: calc(var(--page-margin) * -1);
+
+    @include hide-scrollbars();
+
+    &::before,
+    &::after {
+      content: '';
+      // .friend-item has 8px of side padding, we need an extra 4px at the beginning and end to fill the 12px side margin of the view
+      flex: 0 0 calc(var(--page-margin) - var(--page-badges-gutter));
+    }
+
+    .badge-item {
+      padding: 0px var(--page-badges-gutter);
+
+      .badge-name {
+        display: block;
+        text-align: center;
+        margin: var(--page-margin) 0px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+// User army
+.user-army-section {
+  margin: calc(var(--page-margin) * 2) var(--page-margin) var(--page-margin);
+  padding-bottom: calc(var(--page-margin) * 2);
+
+  .army-category {
+    --page-category-background: rgb(13, 54, 73);
+    --page-category-background-rgb: 13,54,73;
+  }
+
+  .heading-row {
+    margin-bottom: var(--page-margin);
+    justify-content: space-between;
+    align-items: center;
+
+    .details-section-title {
+      margin: 0px;
+    }
+
+    .heading-call-to-action {
+      padding: calc(var(--page-margin) / 2) calc(var(--page-margin) / 4);
+      text-decoration: none;
+      color: var(--ion-color-secondary);
+    }
+  }
+
+  .army-row {
+    --ion-grid-column-padding: var(--page-categories-gutter);
+
+    padding: calc(var(--page-categories-gutter) * 3);
+    height: 100%;
+    align-content: flex-start;
+    overflow: scroll;
+   
+    .army-item {
+      padding: 0px var(--page-pictures-gutter) calc(var(--page-pictures-gutter) * 2);
+    }
+
+    .army-anchor {
+      height: 100%;
+      text-decoration: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      .army-title {
+        margin: auto;
+        text-transform: uppercase;
+        font-weight: 300;
+        font-size: 9px;
+        letter-spacing: 1px;
+        padding: calc((var(--page-margin) / 4) * 3) var(--page-margin);
+        color: var(--ion-color-lightest);
+        background-color: var(--page-category-background);
+        border-radius: var(--app-fair-radius);
+      }
+    }
+  }
+}
+
 
 .user-photos-section {
   margin: calc(var(--page-margin) * 2) var(--page-margin) var(--page-margin);

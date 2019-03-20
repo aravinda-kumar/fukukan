@@ -11,7 +11,7 @@ app-image-shell.user-image {
   }
 }
 
-.user-title > app-text-shell {
+.user-motto > app-text-shell {
   --text-shell-line-height: 16px;
   max-width: 70%;
 
@@ -27,6 +27,7 @@ app-image-shell.user-image {
 
   &.text-loaded {
     min-width: 0px;
+    text-transform: uppercase;
   }
 }
 
@@ -50,6 +51,22 @@ app-image-shell.friend-picture {
 }
 
 .friend-name > app-text-shell {
+  --text-shell-line-height: 14px;
+}
+
+app-image-shell.badge-picture {
+  --image-shell-border-radius: var(--page-border-radius);
+}
+
+.badge-name > app-text-shell {
+  --text-shell-line-height: 14px;
+}
+
+app-image-shell.army-picture {
+  --image-shell-border-radius: var(--page-border-radius);
+}
+
+.army-name > app-text-shell {
   --text-shell-line-height: 14px;
 }
 

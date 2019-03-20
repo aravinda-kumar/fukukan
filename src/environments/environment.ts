@@ -7,6 +7,14 @@ export const environment = {
   shell: {
     debug: false,
     networkDelay: 2000
+  },
+  firebase: {
+    apiKey: 'AIzaSyBCpFWRU2E3JRD_Sq98zKGdXRMAVAmVQqw',
+    authDomain: 'fukukan-2e985.firebaseapp.com',
+    databaseURL: 'https://fukukan-2e985.firebaseio.com',
+    projectId: 'fukukan-2e985',
+    storageBucket: 'fukukan-2e985.appspot.com',
+    messagingSenderId: '935559232608'
   }
 };
 

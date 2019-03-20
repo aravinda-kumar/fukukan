@@ -13,112 +13,185 @@
       <ion-slide class="browsing-categories-slide question-slide">
         <ion-row class="slide-inner-row">
           <ion-col class="question-options-col" size="12">
-            <h2 class="slide-title">What are you browsing for?</h2>
+            <h2 class="slide-title">Which langage will you prefer?</h2>
             <ion-list class="question-options-list">
-              <ion-radio-group formControlName="browsingCategory">
+              <ion-radio-group formControlName="languageCategory">
                 <ion-item class="question-option">
-                  <ion-label>Woman</ion-label>
-                  <ion-radio value="woman"></ion-radio>
+                  <ion-label>English</ion-label>
+                  <ion-radio value="en"></ion-radio>
                 </ion-item>
                 <ion-item class="question-option">
-                  <ion-label>Men</ion-label>
-                  <ion-radio value="men"></ion-radio>
+                  <ion-label>Français</ion-label>
+                  <ion-radio value="fr"></ion-radio>
                 </ion-item>
                 <ion-item class="question-option">
-                  <ion-label>Kids</ion-label>
-                  <ion-radio value="kids"></ion-radio>
-                </ion-item>
-                <ion-item class="question-option">
-                  <ion-label>Petit</ion-label>
-                  <ion-radio value="petit"></ion-radio>
-                </ion-item>
-                <ion-item class="question-option">
-                  <ion-label>Plus Size</ion-label>
-                  <ion-radio value="plus-size"></ion-radio>
-                </ion-item>
-                <ion-item class="question-option">
-                  <ion-label>New In</ion-label>
-                  <ion-radio value="new-in"></ion-radio>
+                  <ion-label>日本語</ion-label>
+                  <ion-radio value="jp"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-list>
           </ion-col>
         </ion-row>
       </ion-slide>
+      <ion-slide class=" question-slide">
+        <ion-row class="slide-inner-row">
+          <ion-col class="question-options-col" size="12">
+            <h2 class="slide-title">General Information</h2>
+            <br />
+            <ion-list class="inputs-list">
+              <ion-item class="input-item">
+                <ion-label position="floating">First Name</ion-label>
+                <ion-input type="text" formControlName="firstname" clearInput></ion-input>
+              </ion-item>
+              <ion-item class="input-item">
+                <ion-label position="floating">Last Name</ion-label>
+                <ion-input type="text" formControlName="lastname" clearInput></ion-input>
+              </ion-item>
+              <ion-item class="input-item">
+                <ion-label position="floating">Motto</ion-label>
+                <ion-input type="text" formControlName="motto" clearInput></ion-input>
+              </ion-item>
+              <ion-item class="input-item">
+                <ion-label position="floating">About you</ion-label>
+                <ion-textarea type="text" formControlName="about" spellcheck="true" clearInput rows="5" wrap="soft"></ion-textarea>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+      <ion-slide class=" question-slide">
+        <ion-row class="slide-inner-row">
+          <ion-col class="question-options-col" size="12">
+            <h2 class="slide-title">Your profile photo</h2>
+            <br />
+            <ion-row no-padding>
+              <ion-col size="6" offset="3">
+                <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+                  <app-image-shell [mode]="'cover'" class="user-avatar add-spinner" [src]="image"></app-image-shell>
+                </app-aspect-ratio>
+              </ion-col>
+            </ion-row>
+
+            <br />
+            
+            <ion-row no-padding>
+              <ion-col size="6" offset="3">
+                <ion-button fill="outline" color="secondary" expand="block" size="small" (click)="openImagePicker()">Change
+                  Picture</ion-button>
+              </ion-col>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-slide>
       <ion-slide class="interests-to-follow-slide question-slide">
         <ion-row class="slide-inner-row">
           <ion-col class="heading-col">
-            <h2 class="slide-title">Pick categories to follow</h2>
+            <h2 class="slide-title">Which games are you playing?</h2>
             <p class="slide-subtitle">
               You can add or change them later
             </p>
           </ion-col>
           <ion-col class="question-options-col">
-            <ion-row class="options-list-row" formGroupName="followingInterests">
-              <ion-col size="6">
+            <ion-row class="options-list-row" formGroupName="games">
+              <ion-col size="12">
                 <app-checkbox-wrapper class="custom-checkbox">
-                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/sample-images/getting-started/category1-1.1.png'">
-                    <app-aspect-ratio [ratio]="{w:1, h:1}">
-                      <span class="checkbox-title">Tops</span>
-                      <ion-checkbox checked=true formControlName="tops"></ion-checkbox>
+                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/getting-started/40k.jpg'">
+                    <app-aspect-ratio [ratio]="{w:2, h:1}">
+                      <span class="checkbox-title">40K</span>
+                      <ion-checkbox formControlName="w40k"></ion-checkbox>
                     </app-aspect-ratio>
                   </app-image-shell>
                 </app-checkbox-wrapper>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12">
                 <app-checkbox-wrapper class="custom-checkbox">
-                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/sample-images/getting-started/category2-1.1.png'">
-                    <app-aspect-ratio [ratio]="{w:1, h:1}">
-                      <span class="checkbox-title">Dresses</span>
-                      <ion-checkbox formControlName="dresses"></ion-checkbox>
+                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/getting-started/aos.jpg'">
+                    <app-aspect-ratio [ratio]="{w:2, h:1}">
+                      <span class="checkbox-title">AoS</span>
+                      <ion-checkbox formControlName="aos"></ion-checkbox>
                     </app-aspect-ratio>
                   </app-image-shell>
                 </app-checkbox-wrapper>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12">
                 <app-checkbox-wrapper class="custom-checkbox">
-                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/sample-images/getting-started/category3-1.1.png'">
-                    <app-aspect-ratio [ratio]="{w:1, h:1}">
-                      <span class="checkbox-title">Jeans</span>
-                      <ion-checkbox formControlName="jeans"></ion-checkbox>
+                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/getting-started/killteam.jpg'">
+                    <app-aspect-ratio [ratio]="{w:2, h:1}">
+                      <span class="checkbox-title">KillTeam</span>
+                      <ion-checkbox formControlName="killteam"></ion-checkbox>
                     </app-aspect-ratio>
                   </app-image-shell>
                 </app-checkbox-wrapper>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="12">
                 <app-checkbox-wrapper class="custom-checkbox">
-                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/sample-images/getting-started/category4-1.1.png'">
-                    <app-aspect-ratio [ratio]="{w:1, h:1}">
-                      <span class="checkbox-title">Jackets</span>
-                      <ion-checkbox checked=true formControlName="jackets"></ion-checkbox>
-                    </app-aspect-ratio>
-                  </app-image-shell>
-                </app-checkbox-wrapper>
-              </ion-col>
-              <ion-col size="6">
-                <app-checkbox-wrapper class="custom-checkbox">
-                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/sample-images/getting-started/category5-1.1.png'">
-                    <app-aspect-ratio [ratio]="{w:1, h:1}">
-                      <span class="checkbox-title">Shoes</span>
-                      <ion-checkbox formControlName="shoes"></ion-checkbox>
-                    </app-aspect-ratio>
-                  </app-image-shell>
-                </app-checkbox-wrapper>
-              </ion-col>
-              <ion-col size="6">
-                <app-checkbox-wrapper class="custom-checkbox">
-                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/sample-images/getting-started/category6-1.1.png'">
-                    <app-aspect-ratio [ratio]="{w:1, h:1}">
-                      <span class="checkbox-title">Glasses</span>
-                      <ion-checkbox formControlName="glasses"></ion-checkbox>
+                  <app-image-shell [mode]="'cover'" class="checkbox-cover add-overlay add-spinner" [src]="'./assets/getting-started/shadespire.png'">
+                    <app-aspect-ratio [ratio]="{w:2, h:1}">
+                      <span class="checkbox-title">ShadeSpire</span>
+                      <ion-checkbox formControlName="shadespire"></ion-checkbox>
                     </app-aspect-ratio>
                   </app-image-shell>
                 </app-checkbox-wrapper>
               </ion-col>
             </ion-row>
           </ion-col>
+        </ion-row>
+      </ion-slide>
+      <ion-slide class="browsing-categories-slide question-slide">
+        <ion-row class="slide-inner-row">
+          <ion-col class="question-options-col" size="12">
+            <h2 class="slide-title">Which region are you playing in?</h2>
+            <ion-list class="question-options-list">
+              <ion-radio-group formControlName="geoCategory">
+                <ion-item class="question-option">
+                  <ion-label>USA</ion-label>
+                  <ion-radio value="usa"></ion-radio>
+                </ion-item>
+                <ion-item class="question-option">
+                  <ion-label>Europe</ion-label>
+                  <ion-radio value="eu"></ion-radio>
+                </ion-item>
+                <ion-item class="question-option">
+                  <ion-label>Japan</ion-label>
+                  <ion-radio value="jp"></ion-radio>
+                </ion-item>
+                <ion-item class="question-option">
+                  <ion-label>South East Asia</ion-label>
+                  <ion-radio value="sea"></ion-radio>
+                </ion-item>
+                <ion-item class="question-option">
+                  <ion-label>China</ion-label>
+                  <ion-radio value="cn"></ion-radio>
+                </ion-item>
+                <ion-item class="question-option">
+                  <ion-label>Others</ion-label>
+                  <ion-radio value="other"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+      <ion-slide class="browsing-categories-slide question-slide">
+        <ion-row class="slide-inner-row">
+          <ion-col class="question-options-col" size="12">
+            <h2 class="slide-title">Are you mainly?</h2>
+            <ion-list class="question-options-list" formGroupName="userType">
+
+              <ion-item class="question-option">
+                <ion-label>Player</ion-label>
+                <ion-checkbox formControlName="player"></ion-checkbox>
+              </ion-item>
+              <ion-item class="question-option">
+                <ion-label>Event Organiser</ion-label>
+                <ion-checkbox formControlName="event"></ion-checkbox>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
           <ion-col class="call-to-action-col">
-            <ion-button class="signup-button" color="secondary" expand="block" [routerLink]="['/auth/signup']">Sign Up</ion-button>
+            <ion-button class="signup-button" color="secondary" expand="block" (click)="createProfile()">Create Profile</ion-button>
           </ion-col>
         </ion-row>
       </ion-slide>

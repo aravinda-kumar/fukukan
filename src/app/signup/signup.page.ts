@@ -7,6 +7,8 @@ import { TermsOfServicePage } from '../terms-of-service/terms-of-service.page';
 import { PrivacyPolicyPage } from '../privacy-policy/privacy-policy.page';
 import { PasswordValidator } from '../validators/password.validator';
 
+import { AuthService } from '../services/auth.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -17,6 +19,8 @@ import { PasswordValidator } from '../validators/password.validator';
 export class SignupPage implements OnInit {
   signupForm: FormGroup;
   matching_passwords_group: FormGroup;
+  errorMessage = '';
+  successMessage = '';
 
   validation_messages = {
     'email': [
@@ -38,11 +42,12 @@ export class SignupPage implements OnInit {
   constructor(
     public router: Router,
     public modalController: ModalController,
+    private authService: AuthService,
     public menu: MenuController
   ) {
     this.matching_passwords_group = new FormGroup({
       'password': new FormControl('', Validators.compose([
-        Validators.minLength(5),
+        Validators.minLength(6),
         Validators.required
       ])),
       'confirm_password': new FormControl('', Validators.required)
@@ -77,9 +82,21 @@ export class SignupPage implements OnInit {
     return await modal.present();
   }
 
-  doSignup(): void {
-    console.log('do sign up');
-    this.router.navigate(['app/categories']);
+  goLoginPage(): void {
+    this.router.navigate(['/auth/login']);
+  }
+
+  doSignup(value): void {
+    this.authService.doEmailRegister(value)
+     .then(res => {
+       console.log(res);
+       this.errorMessage = '';
+       this.successMessage = 'Your account has been created. Please log in.';
+     }, err => {
+       console.log(err);
+       this.errorMessage = err.message;
+       this.successMessage = '';
+     });
   }
 
   doFacebookSignup(): void {
